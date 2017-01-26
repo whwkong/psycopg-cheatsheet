@@ -17,6 +17,21 @@ see: <http://www.tutorialspoint.com/postgresql/>
 
 ## Data Types
 
+Basic data types
+
+    char(80)        fixed length
+    varchar(80)     variable length up to 80
+    int
+    smallint
+    real            floats
+    double          double floats
+    date            
+    time
+    timestamp
+    interval
+    point           a geometric type
+
+
 ## Creating a db
 
 command line
@@ -52,7 +67,15 @@ Drop or delete a database
        PRIMARY KEY( one or more columns )
     );
 
-Example :
+Examples :
+
+    CREATE TABLE weather (
+        city            varchar(80),   
+        temp_lo         int,           -- low temperature
+        temp_hi         int,           -- high temperature
+        prcp            real,          -- precipitation
+        date            date
+    );
 
     CREATE TABLE COMPANY(
        ID INT PRIMARY KEY     NOT NULL,
