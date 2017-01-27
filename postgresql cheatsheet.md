@@ -49,6 +49,44 @@ command line
     \c                      : switch databases  
     \connect testdb          
 
+## Generating SQL from internal commands
+
+The `psql -E` switch outputs SQL commands for internal psql commands such as  
+`\l` or `\dt`.  
+
+
+    psql -E -l 
+    psql -E -U postgres -c "\l"
+
+The output is : 
+
+    ********* QUERY **********
+    SELECT d.datname as "Name",
+           pg_catalog.pg_get_userbyid(d.datdba) as "Owner",
+           pg_catalog.pg_encoding_to_char(d.encoding) as "Encoding",
+           d.datcollate as "Collate",
+           d.datctype as "Ctype",
+           pg_catalog.array_to_string(d.datacl, E'\n') AS "Access privileges"
+    FROM pg_catalog.pg_database d
+    ORDER BY 1;
+    **************************
+    
+                                                 List of databases
+                 Name             |    Owner    | Encoding |   Collate   |    Ctype    |   Access privileges
+    ------------------------------+-------------+----------+-------------+-------------+-----------------------
+     postgres                     | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+     template0                    | postgres    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                                  |             |          |             |             | postgres=CTc/postgres
+
+
+    SELECT d.datname as "Name"
+    FROM pg_catalog.pg_database d   -- d now refers to pg_catalog.pg_database 
+    ORDER BY 1;     
+        -- note that 'ORDER by 1' means order by the first column, which in this case is 'Name'.
+        -- oft considered bad form as the column order can change.  
+
+    SELECT datname from pg_database -- functionally same as above
+
 ## Drop Database
 
 Drop or delete a database

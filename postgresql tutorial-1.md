@@ -48,7 +48,7 @@ application while allowing less flexibility than INSERT. An example would be:
 
 ## Querying a table
 
-    select * from tables;       -- select all columns from tables
+    select * from tables;       -- select all columns from tables (this form usually discouraged)
     select city, temp_lo, temp_hi, prcp, date from weather;     -- the very same 
 
 You can write expressions (rather than just simple column references) with. 

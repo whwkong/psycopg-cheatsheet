@@ -1,1 +1,1 @@
-# psycopg-cheatsheet
+# postgreSQL and psycopg cheatsheet
